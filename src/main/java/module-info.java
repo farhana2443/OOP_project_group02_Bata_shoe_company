@@ -5,4 +5,6 @@ module com.example.oop_project_group02_bata_shoe_company {
 
     opens com.example.oop_project_group02_bata_shoe_company to javafx.fxml;
     exports com.example.oop_project_group02_bata_shoe_company;
+    exports com.example.oop_project_group02_bata_shoe_company.Summy;
+    opens com.example.oop_project_group02_bata_shoe_company.Summy to javafx.fxml;
 }
