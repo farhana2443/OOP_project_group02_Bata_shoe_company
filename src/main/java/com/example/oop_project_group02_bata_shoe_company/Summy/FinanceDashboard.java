@@ -26,23 +26,23 @@ public class FinanceDashboard
     @javafx.fxml.FXML
     private Button btnbankreconciliation;
     @javafx.fxml.FXML
-    private TableColumn dateTableColumn;
+    private TableColumn<FinanceRecordModelClass, LocalDate>dateTableColumn;
     @javafx.fxml.FXML
-    private TableColumn BranchTableColumn;
+    private TableColumn<FinanceRecordModelClass, String> BranchTableColumn;
     @javafx.fxml.FXML
-    private ComboBox financebranchCB;
+    private ComboBox<String> financebranchCB;
     @javafx.fxml.FXML
     private DatePicker financedatepickerCB;
     @javafx.fxml.FXML
-    private TableColumn expenseTableColumn;
+    private TableColumn<FinanceRecordModelClass, Double> expenseTableColumn;
     @javafx.fxml.FXML
     private Button btnexpensetracker;
     @javafx.fxml.FXML
     private Button btnbudgetforecast;
     @javafx.fxml.FXML
-    private TableView financedashboardTableVIew;
+    private TableView<FinanceRecordModelClass>financedashboardTableVIew;
     @javafx.fxml.FXML
-    private TableColumn incomeTableColumn;
+    private TableColumn<FinanceRecordModelClass, Double> incomeTableColumn;
     @javafx.fxml.FXML
     private Label StatusoffilterLabel;
     @javafx.fxml.FXML

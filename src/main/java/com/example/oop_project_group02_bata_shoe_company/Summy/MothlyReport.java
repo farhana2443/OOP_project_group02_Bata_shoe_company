@@ -14,5 +14,25 @@ public class MothlyReport
 
     @javafx.fxml.FXML
     public void exportmonthlyreportPDF(ActionEvent actionEvent) {
+
+    }
+
+    public Button getMonthlyreportexportbtn() {
+        return monthlyreportexportbtn;
+    }
+
+    public void setMonthlyreportexportbtn(Button monthlyreportexportbtn) {
+        this.monthlyreportexportbtn = monthlyreportexportbtn;
+    }
+
+    @Override
+    public String toString() {
+        return "MothlyReport{" +
+                "monthlyreportexportbtn=" + monthlyreportexportbtn +
+                '}';
+    }
+
+    public MothlyReport(Button monthlyreportexportbtn) {
+        this.monthlyreportexportbtn = monthlyreportexportbtn;
     }
 }
