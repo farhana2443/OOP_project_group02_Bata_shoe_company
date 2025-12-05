@@ -1,5 +1,9 @@
 package com.example.oop_project_group02_bata_shoe_company.Summy;
 
+import javafx.event.ActionEvent;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+
 public class EmployeeManagement
 {
     @javafx.fxml.FXML

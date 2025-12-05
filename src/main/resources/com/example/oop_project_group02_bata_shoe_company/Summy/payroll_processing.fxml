@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="536.0" prefWidth="600.0"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.oop_project_group02_bata_shoe_company.Summy.PayrollProcessing">
+
+    <children>
+
+        <Text layoutX="222.0" layoutY="68.0"
+              strokeType="OUTSIDE" strokeWidth="0.0"
+              text="Payroll Processing" textAlignment="CENTER">
+            <font>
+                <Font name="System Bold Italic" size="18.0"/>
+            </font>
+        </Text>
+
+        <Text layoutX="84.0" layoutY="131.0" text="Employee Name"/>
+        <Text layoutX="84.0" layoutY="171.0" text="Attendance Days"/>
+        <Text layoutX="84.0" layoutY="213.0" text="Deductions"/>
+
+        <!-- Input Fields -->
+        <TextField fx:id="employeeNameField"
+                   layoutX="222.0" layoutY="114.0"
+                   prefHeight="26.0" prefWidth="189.0"/>
+
+        <TextField fx:id="attendanceDaysField"
+                   layoutX="222.0" layoutY="153.0"
+                   prefHeight="26.0" prefWidth="189.0"/>
+
+        <TextField fx:id="deductionsField"
+                   layoutX="222.0" layoutY="195.0"
+                   prefHeight="26.0" prefWidth="189.0"/>
+
+        <!-- Process Salary Button -->
+        <Button layoutX="222.0" layoutY="242.0"
+                text="Process Salary"
+                onAction="#processSalary"/>
+
+        <!-- Table -->
+        <TableView fx:id="salaryTable"
+                   layoutX="84.0" layoutY="300.0"
+                   prefHeight="200.0" prefWidth="417.0">
+
+            <columns>
+                <TableColumn fx:id="employeeColumn"
+                             prefWidth="139.2"
+                             text="Employee"/>
+
+                <TableColumn fx:id="salaryColumn"
+                             prefWidth="123.2"
+                             text="Salary"/>
+
+                <TableColumn fx:id="deductionsColumn"
+                             prefWidth="152.8"
+                             text="Deductions"/>
+            </columns>
+
+        </TableView>
+
+        <!-- PDF Download Button -->
+        <Button layoutX="340.0" layoutY="242.0"
+                text="Download PDF report"
+                onAction="#downloadPdfReport"/>
+
+    </children>
+</AnchorPane>
