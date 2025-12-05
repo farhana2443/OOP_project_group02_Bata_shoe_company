@@ -17,16 +17,16 @@
          <Font name="System Bold" size="26.0" />
       </font></Label>
 
-     <Button fx:id="btnexpensetracker" layoutX="436.0" layoutY="83.0" onAction="#openDailyTransactions" text="Expense Tracker" />
+     <Button fx:id="btnexpensetracker" layoutX="436.0" layoutY="83.0" onAction="#openexpenseTracker" text="Expense Tracker" />
 
      <Button fx:id="btnVendorPayments" layoutX="62.0" layoutY="83.0" onAction="#openVendorPayments" text="Vendor Payments" />
 
      <Button fx:id="btnMonthlyReport" layoutX="189.0" layoutY="83.0" onAction="#openMonthlyReport" text="Monthly Reports" />
 
      <Button fx:id="btnPayrollProcessing" layoutX="308.0" layoutY="83.0" onAction="#openPayroll" text="Payroll Processing" />
-   <Button fx:id="btntaxreport" layoutX="381.0" layoutY="123.0" onAction="#openDailyTransactions" text="Tax Report" />
-   <Button fx:id="btnbudgetforecast" layoutX="134.0" layoutY="123.0" onAction="#openMonthlyReport" text="Budget Forecast" />
-   <Button fx:id="btnbankreconciliation" layoutX="253.0" layoutY="123.0" onAction="#openPayroll" text="Bank Reconciliation" />
+   <Button fx:id="btntaxreport" layoutX="381.0" layoutY="123.0" onAction="#openTexReport" text="Tax Report" />
+   <Button fx:id="btnbudgetforecast" layoutX="134.0" layoutY="123.0" onAction="#openBudgetForecast" text="Budget Forecast" />
+   <Button fx:id="btnbankreconciliation" layoutX="253.0" layoutY="123.0" onAction="#openBankReconciliation" text="Bank Reconciliation" />
    <Label layoutX="44.0" layoutY="178.0" text="Daily Financial Dashboard">
       <font>
          <Font name="System Bold Italic" size="20.0" />
