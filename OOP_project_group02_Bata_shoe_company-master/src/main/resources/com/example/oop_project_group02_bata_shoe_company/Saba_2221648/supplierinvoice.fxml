@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oop_project_group02_bata_shoe_company.Saba_2221648.inventoryOfficer.supplierinvoice">
+   <children>
+      <DatePicker fx:id="invoiceDatePicker" layoutX="134.0" layoutY="130.0" />
+      <TextField fx:id="invoiceCode" layoutX="134.0" layoutY="177.0" />
+      <Label layoutX="30.0" layoutY="134.0" prefHeight="18.0" prefWidth="49.0" text="Date:" />
+      <Label layoutX="21.0" layoutY="181.0" prefHeight="18.0" prefWidth="84.0" text="Invoice Code :" />
+      <Label layoutX="177.0" layoutY="37.0" prefHeight="27.0" prefWidth="264.0" text="Supplier Invoice Information ">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Button layoutX="248.0" layoutY="249.0" mnemonicParsing="false" onAction="#saveButtonOnAction" text="Save" />
+   </children>
+</AnchorPane>
