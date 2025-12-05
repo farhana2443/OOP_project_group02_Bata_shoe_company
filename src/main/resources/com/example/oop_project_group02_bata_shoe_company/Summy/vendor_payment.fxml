@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oop_project_group02_bata_shoe_company.Summy.VendorPayment">
+<AnchorPane prefHeight="428.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oop_project_group02_bata_shoe_company.Summy.VendorPayment">
 
      <Label layoutX="222.0" layoutY="15.0" text="Vendor Payment">
       <font>
@@ -41,5 +41,6 @@
          <TableColumn fx:id="amounttablecolumn" prefWidth="124.0" text="Amount" />
      </columns>
    </TableView>
+   <Button fx:id="downloadInvoiceListBtn" layoutX="40.0" layoutY="365.0" onAction="#downloadInvoiceList" text="Download Clearance PDF report" />
 
 </AnchorPane>

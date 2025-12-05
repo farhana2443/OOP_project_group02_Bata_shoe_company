@@ -1,5 +1,6 @@
 package com.example.oop_project_group02_bata_shoe_company.Summy;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.*;
 import javafx.fxml.FXMLLoader;
@@ -10,8 +11,13 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.time.LocalDate;
+import java.util.List;
+
+import static com.example.oop_project_group02_bata_shoe_company.Summy.FinanceRecordModelClass.observableRecords;
 
 public class FinanceDashboard
 {
@@ -26,44 +32,58 @@ public class FinanceDashboard
     @javafx.fxml.FXML
     private Button btnbankreconciliation;
     @javafx.fxml.FXML
-    private TableColumn dateTableColumn;
+    private TableColumn<FinanceRecordModelClass, LocalDate>dateTableColumn;
     @javafx.fxml.FXML
-    private TableColumn BranchTableColumn;
+    private TableColumn<FinanceRecordModelClass, String> BranchTableColumn;
     @javafx.fxml.FXML
-    private ComboBox financebranchCB;
+    private ComboBox<String> financebranchCB;
     @javafx.fxml.FXML
     private DatePicker financedatepickerCB;
     @javafx.fxml.FXML
-    private TableColumn expenseTableColumn;
+    private TableColumn<FinanceRecordModelClass, Double> expenseTableColumn;
     @javafx.fxml.FXML
     private Button btnexpensetracker;
     @javafx.fxml.FXML
     private Button btnbudgetforecast;
     @javafx.fxml.FXML
-    private TableView financedashboardTableVIew;
+    private TableView<FinanceRecordModelClass>financedashboardTableVIew;
     @javafx.fxml.FXML
-    private TableColumn incomeTableColumn;
+    private TableColumn<FinanceRecordModelClass, Double> incomeTableColumn;
     @javafx.fxml.FXML
     private Label StatusoffilterLabel;
     @javafx.fxml.FXML
     private Button btntaxreport;
+    private ObservableList<FinanceRecordModelClass> allRecords;
+
 
 
 
     public FinanceDashboard() { }
     public void initialize() {
-        financebranchCB.getItems().addAll("All","Dhaka", "Chittagong", "Rangpur");
+
+        FinanceRecordModelClass.loadRecordsFromBIN();
+
+
+        allRecords = FXCollections.observableArrayList(
+                FinanceRecordModelClass.getObservableRecords()
+        );
+
+        financedashboardTableVIew.setItems(allRecords);
 
         dateTableColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
         BranchTableColumn.setCellValueFactory(new PropertyValueFactory<>("branch"));
         incomeTableColumn.setCellValueFactory(new PropertyValueFactory<>("income"));
         expenseTableColumn.setCellValueFactory(new PropertyValueFactory<>("expense"));
 
-        financedashboardTableVIew.setItems(FileHelperModelClass.getObservableRecords());
+        financebranchCB.getItems().addAll("All", "Dhaka", "Chittagong", "Rangpur");
+        financebranchCB.setValue("All");
+
         StatusoffilterLabel.setText("Showing all records");
 
 
     }
+
+
 
     private void switchScene(String fxmlFile, Button button) {
         try {
@@ -74,6 +94,11 @@ public class FinanceDashboard
             e.printStackTrace();
         }
     }
+
+
+
+
+
 
 
     @javafx.fxml.FXML
@@ -94,28 +119,31 @@ public class FinanceDashboard
     @javafx.fxml.FXML
     public void filterTable(ActionEvent actionEvent) {
 
-        ObservableList<FinanceRecordModelClass> records = FileHelperModelClass.getObservableRecords();
         LocalDate selectedDate = financedatepickerCB.getValue();
-        String selectedBranch = (String) financebranchCB.getValue();
+        String selectedBranch = financebranchCB.getValue();
 
+        ObservableList<FinanceRecordModelClass> filteredList =
+                FXCollections.observableArrayList(allRecords);
 
         if (selectedDate != null) {
-            records = records.filtered(record -> record.getDate().equals(selectedDate));
+            filteredList = filteredList.filtered(
+                    record -> record.getDate().equals(selectedDate)
+            );
         }
 
-
-        if (selectedBranch != null && !selectedBranch.equals("All") && !selectedBranch.isEmpty()) {
-            records = records.filtered(record -> record.getBranch().equals(selectedBranch));
+        if (selectedBranch != null && !selectedBranch.equals("All")) {
+            filteredList = filteredList.filtered(
+                    record -> record.getBranch().equals(selectedBranch)
+            );
         }
 
-        financedashboardTableVIew.setItems(records);
+        financedashboardTableVIew.setItems(filteredList);
 
-
-        if ((selectedDate == null || selectedDate.toString().isEmpty()) &&
-                (selectedBranch == null || selectedBranch.equals("All") || selectedBranch.isEmpty())) {
+        if ((selectedDate == null) &&
+                (selectedBranch == null || selectedBranch.equals("All"))) {
             StatusoffilterLabel.setText("Showing all records");
         } else {
-            StatusoffilterLabel.setText("Filtered records: " + records.size());
+            StatusoffilterLabel.setText("Filtered records: " + filteredList.size());
         }
     }
 
@@ -272,24 +300,7 @@ public class FinanceDashboard
         this.btntaxreport = btntaxreport;
     }
 
-    public FinanceDashboard(Button btnPayrollProcessing, Button btnVendorPayments, Button btnMonthlyReport, Button applyFilterbtn, Button btnbankreconciliation, TableColumn dateTableColumn, TableColumn branchTableColumn, ComboBox financebranchCB, DatePicker financedatepickerCB, TableColumn expenseTableColumn, Button btnexpensetracker, Button btnbudgetforecast, TableView financedashboardTableVIew, TableColumn incomeTableColumn, Label statusoffilterLabel, Button btntaxreport) {
-        this.btnPayrollProcessing = btnPayrollProcessing;
-        this.btnVendorPayments = btnVendorPayments;
-        this.btnMonthlyReport = btnMonthlyReport;
-        ApplyFilterbtn = applyFilterbtn;
-        this.btnbankreconciliation = btnbankreconciliation;
-        this.dateTableColumn = dateTableColumn;
-        BranchTableColumn = branchTableColumn;
-        this.financebranchCB = financebranchCB;
-        this.financedatepickerCB = financedatepickerCB;
-        this.expenseTableColumn = expenseTableColumn;
-        this.btnexpensetracker = btnexpensetracker;
-        this.btnbudgetforecast = btnbudgetforecast;
-        this.financedashboardTableVIew = financedashboardTableVIew;
-        this.incomeTableColumn = incomeTableColumn;
-        StatusoffilterLabel = statusoffilterLabel;
-        this.btntaxreport = btntaxreport;
-    }
+
 
     @javafx.fxml.FXML
     public void openTexReport(ActionEvent actionEvent) {
