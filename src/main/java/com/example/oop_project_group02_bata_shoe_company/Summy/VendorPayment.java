@@ -2,61 +2,73 @@ package com.example.oop_project_group02_bata_shoe_company.Summy;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.*;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import org.openpdf.text.DocumentException;
 
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.function.Function;
 
 public class VendorPayment
 {
-    @javafx.fxml.FXML
+    @FXML
     private Button btnBack;
-    @javafx.fxml.FXML
-    private TextField txtInvoiceId;
-    @javafx.fxml.FXML
-    private TextField txtAmount;
-    @javafx.fxml.FXML
-    private Button btnSubmitPayment;
-    @javafx.fxml.FXML
-    private TextField txtReference;
-    @javafx.fxml.FXML
+    @FXML
     private TableColumn<VendorPaymentModelClass, String> invoicetablecolumn;
-    @javafx.fxml.FXML
+    @FXML
     private TableColumn<VendorPaymentModelClass, Double> amounttablecolumn;
-    @javafx.fxml.FXML
-    private Label submitpaymentstatus;
-    @javafx.fxml.FXML
+    @FXML
     private TableColumn<VendorPaymentModelClass, LocalDate> duedatetablecolumn;
-    @javafx.fxml.FXML
+    @FXML
+    private TextField txtInvoiceId;
+    @FXML
+    private Label submitpaymentstatus;
+    @FXML
+    private TextField txtAmount;
+    @FXML
+    private Button btnSubmitPayment;
+    @FXML
     private TableView<VendorPaymentModelClass> vendorpaymentTableView;
     @FXML
-    private DatePicker txtDueDate;
+    private Button downloadInvoiceListBtn;
+    @FXML
+    private TextField txtReference;
 
     private static final String FILE_PATH = "bin/vendorPayment.bin";
 
+    private final ObservableList<VendorPaymentModelClass> paymentRecords = FXCollections.observableArrayList();
+    private final ObservableList<VendorPaymentModelClass> selectedInvoices = FXCollections.observableArrayList();
 
-    private ObservableList<VendorPaymentModelClass> paymentRecords = FXCollections.observableArrayList();
-
-
-    public VendorPayment() { }
+    @javafx.fxml.FXML
     public void initialize() {
-
         invoicetablecolumn.setCellValueFactory(new PropertyValueFactory<>("invoiceId"));
         amounttablecolumn.setCellValueFactory(new PropertyValueFactory<>("amount"));
         duedatetablecolumn.setCellValueFactory(new PropertyValueFactory<>("dueDate"));
 
         vendorpaymentTableView.setItems(paymentRecords);
+
         submitpaymentstatus.setText("");
+
         loadBIN();
-        vendorpaymentTableView.refresh();
 
+        vendorpaymentTableView.getSelectionModel().selectedItemProperty().addListener(
+                (obs, oldVal, newVal) -> {
+                    if (newVal != null) {
+                        txtInvoiceId.setText(newVal.getInvoiceId());
+                        txtAmount.setText(String.valueOf(newVal.getAmount()));
+                        txtReference.setText(newVal.getReference());
 
-
+                        selectedInvoices.clear();
+                        selectedInvoices.add(newVal);
+                    }
+                }
+        );
     }
 
     @javafx.fxml.FXML
@@ -65,30 +77,72 @@ public class VendorPayment
 
     @javafx.fxml.FXML
     public void submitPayment(ActionEvent actionEvent) {
-
         try {
             String invoiceId = txtInvoiceId.getText();
             double amount = Double.parseDouble(txtAmount.getText());
-            LocalDate dueDate = txtDueDate.getValue();
             String reference = txtReference.getText();
 
-            if (invoiceId.isEmpty() || reference.isEmpty() || dueDate == null) {
+            if (invoiceId.isEmpty() || reference.isEmpty()) {
                 submitpaymentstatus.setText("Please fill all fields!");
                 return;
             }
 
-            VendorPaymentModelClass payment = new VendorPaymentModelClass(invoiceId, amount, dueDate, reference);
+            VendorPaymentModelClass payment =
+                    new VendorPaymentModelClass(invoiceId, amount, LocalDate.now(), reference);
+
             paymentRecords.add(payment);
 
-            submitpaymentstatus.setText("Payment submitted successfully!");
+            submitpaymentstatus.setText("Payment submitted!");
 
             txtInvoiceId.clear();
             txtAmount.clear();
             txtReference.clear();
-            txtDueDate.setValue(null);
 
         } catch (NumberFormatException e) {
-            submitpaymentstatus.setText("Invalid amount! Please enter a valid number.");
+            submitpaymentstatus.setText("Invalid amount!");
+        }
+
+
+    }
+
+    @javafx.fxml.FXML
+    public void downloadInvoiceList(ActionEvent actionEvent) {
+
+        if (selectedInvoices.isEmpty()) {
+            submitpaymentstatus.setText("Please select an invoice first!");
+            return;
+        }
+
+        String fileName = "invoice_" + selectedInvoices.get(0).getInvoiceId() + ".pdf";
+        String[] headers = {"Invoice ID", "Amount", "Due Date", "Reference"};
+
+        try {
+            PDFHelperModelClass.generatePDF(
+                    fileName,
+                    "Invoice Details",
+                    headers,
+                    new ArrayList<>(selectedInvoices),
+                    java.util.List.of(
+                            VendorPaymentModelClass::getInvoiceId,
+                            vp -> String.valueOf(vp.getAmount()),
+                            vp -> String.valueOf(vp.getDueDate()),
+                            VendorPaymentModelClass::getReference
+                    )
+            );
+
+            submitpaymentstatus.setText("PDF Generated: " + fileName);
+
+
+            paymentRecords.removeAll(selectedInvoices);
+            selectedInvoices.clear();
+
+            txtInvoiceId.clear();
+            txtAmount.clear();
+            txtReference.clear();
+
+        } catch (IOException | DocumentException e) {
+            submitpaymentstatus.setText("PDF Generation Failed!");
+            e.printStackTrace();
         }
     }
 
@@ -100,12 +154,36 @@ public class VendorPayment
         this.btnBack = btnBack;
     }
 
+    public TableColumn getInvoicetablecolumn() {
+        return invoicetablecolumn;
+    }
+
+    public void setInvoicetablecolumn(TableColumn invoicetablecolumn) {
+        this.invoicetablecolumn = invoicetablecolumn;
+    }
+
+    public TableColumn getAmounttablecolumn() {
+        return amounttablecolumn;
+    }
+
+    public void setAmounttablecolumn(TableColumn amounttablecolumn) {
+        this.amounttablecolumn = amounttablecolumn;
+    }
+
     public TextField getTxtInvoiceId() {
         return txtInvoiceId;
     }
 
     public void setTxtInvoiceId(TextField txtInvoiceId) {
         this.txtInvoiceId = txtInvoiceId;
+    }
+
+    public Label getSubmitpaymentstatus() {
+        return submitpaymentstatus;
+    }
+
+    public void setSubmitpaymentstatus(Label submitpaymentstatus) {
+        this.submitpaymentstatus = submitpaymentstatus;
     }
 
     public TextField getTxtAmount() {
@@ -124,6 +202,30 @@ public class VendorPayment
         this.btnSubmitPayment = btnSubmitPayment;
     }
 
+    public TableView getVendorpaymentTableView() {
+        return vendorpaymentTableView;
+    }
+
+    public void setVendorpaymentTableView(TableView vendorpaymentTableView) {
+        this.vendorpaymentTableView = vendorpaymentTableView;
+    }
+
+    public TableColumn getDuedatetablecolumn() {
+        return duedatetablecolumn;
+    }
+
+    public void setDuedatetablecolumn(TableColumn duedatetablecolumn) {
+        this.duedatetablecolumn = duedatetablecolumn;
+    }
+
+    public Button getDownloadInvoiceListBtn() {
+        return downloadInvoiceListBtn;
+    }
+
+    public void setDownloadInvoiceListBtn(Button downloadInvoiceListBtn) {
+        this.downloadInvoiceListBtn = downloadInvoiceListBtn;
+    }
+
     public TextField getTxtReference() {
         return txtReference;
     }
@@ -132,106 +234,32 @@ public class VendorPayment
         this.txtReference = txtReference;
     }
 
-    public TableColumn<VendorPaymentModelClass, String> getInvoicetablecolumn() {
-        return invoicetablecolumn;
-    }
-
-    public void setInvoicetablecolumn(TableColumn<VendorPaymentModelClass, String> invoicetablecolumn) {
-        this.invoicetablecolumn = invoicetablecolumn;
-    }
-
-    public TableColumn<VendorPaymentModelClass, Double> getAmounttablecolumn() {
-        return amounttablecolumn;
-    }
-
-    public void setAmounttablecolumn(TableColumn<VendorPaymentModelClass, Double> amounttablecolumn) {
-        this.amounttablecolumn = amounttablecolumn;
-    }
-
-    public Label getSubmitpaymentstatus() {
-        return submitpaymentstatus;
-    }
-
-    public void setSubmitpaymentstatus(Label submitpaymentstatus) {
-        this.submitpaymentstatus = submitpaymentstatus;
-    }
-
-    public TableColumn<VendorPaymentModelClass, LocalDate> getDuedatetablecolumn() {
-        return duedatetablecolumn;
-    }
-
-    public void setDuedatetablecolumn(TableColumn<VendorPaymentModelClass, LocalDate> duedatetablecolumn) {
-        this.duedatetablecolumn = duedatetablecolumn;
-    }
-
-    public TableView<VendorPaymentModelClass> getVendorpaymentTableView() {
-        return vendorpaymentTableView;
-    }
-
-    public void setVendorpaymentTableView(TableView<VendorPaymentModelClass> vendorpaymentTableView) {
-        this.vendorpaymentTableView = vendorpaymentTableView;
-    }
-
-    public DatePicker getTxtDueDate() {
-        return txtDueDate;
-    }
-
-    public void setTxtDueDate(DatePicker txtDueDate) {
-        this.txtDueDate = txtDueDate;
-    }
-
-    public ObservableList<VendorPaymentModelClass> getPaymentRecords() {
-        return paymentRecords;
-    }
-
-    public void setPaymentRecords(ObservableList<VendorPaymentModelClass> paymentRecords) {
-        this.paymentRecords = paymentRecords;
-    }
-
     @Override
     public String toString() {
         return "VendorPayment{" +
                 "btnBack=" + btnBack +
-                ", txtInvoiceId=" + txtInvoiceId +
-                ", txtAmount=" + txtAmount +
-                ", btnSubmitPayment=" + btnSubmitPayment +
-                ", txtReference=" + txtReference +
                 ", invoicetablecolumn=" + invoicetablecolumn +
                 ", amounttablecolumn=" + amounttablecolumn +
+                ", txtInvoiceId=" + txtInvoiceId +
                 ", submitpaymentstatus=" + submitpaymentstatus +
-                ", duedatetablecolumn=" + duedatetablecolumn +
+                ", txtAmount=" + txtAmount +
+                ", btnSubmitPayment=" + btnSubmitPayment +
                 ", vendorpaymentTableView=" + vendorpaymentTableView +
-                ", txtDueDate=" + txtDueDate +
-                ", paymentRecords=" + paymentRecords +
+                ", duedatetablecolumn=" + duedatetablecolumn +
+                ", downloadInvoiceListBtn=" + downloadInvoiceListBtn +
+                ", txtReference=" + txtReference +
                 '}';
     }
-
-    public VendorPayment(Button btnBack, TextField txtInvoiceId, TextField txtAmount, Button btnSubmitPayment, TextField txtReference, TableColumn<VendorPaymentModelClass, String> invoicetablecolumn, TableColumn<VendorPaymentModelClass, Double> amounttablecolumn, Label submitpaymentstatus, TableColumn<VendorPaymentModelClass, LocalDate> duedatetablecolumn, TableView<VendorPaymentModelClass> vendorpaymentTableView, DatePicker txtDueDate, ObservableList<VendorPaymentModelClass> paymentRecords) {
-        this.btnBack = btnBack;
-        this.txtInvoiceId = txtInvoiceId;
-        this.txtAmount = txtAmount;
-        this.btnSubmitPayment = btnSubmitPayment;
-        this.txtReference = txtReference;
-        this.invoicetablecolumn = invoicetablecolumn;
-        this.amounttablecolumn = amounttablecolumn;
-        this.submitpaymentstatus = submitpaymentstatus;
-        this.duedatetablecolumn = duedatetablecolumn;
-        this.vendorpaymentTableView = vendorpaymentTableView;
-        this.txtDueDate = txtDueDate;
-        this.paymentRecords = paymentRecords;
-    }
-
     private void loadBIN() {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(FILE_PATH))) {
             Object obj = ois.readObject();
-            if (obj instanceof java.util.List) {
+            if (obj instanceof java.util.List<?>) {
                 paymentRecords.addAll((java.util.List<VendorPaymentModelClass>) obj);
             }
         } catch (Exception e) {
-            System.out.println("No existing BIN file found or failed to load.");
+            System.out.println("No existing BIN file or failed to load.");
         }
     }
+
+
 }
-
-
-
