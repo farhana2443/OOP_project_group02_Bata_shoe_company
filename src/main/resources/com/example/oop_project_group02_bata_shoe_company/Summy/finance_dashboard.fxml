@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="583.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oop_project_group02_bata_shoe_company.Summy.FinanceDashboard">
+
+     <Label layoutX="146.0" layoutY="26.0" text="Finance Officer Dashboard" textAlignment="CENTER" textFill="#5303e7">
+      <font>
+         <Font name="System Bold" size="26.0" />
+      </font></Label>
+
+     <Button fx:id="btnexpensetracker" layoutX="436.0" layoutY="83.0" onAction="#openexpenseTracker" text="Expense Tracker" />
+
+     <Button fx:id="btnVendorPayments" layoutX="62.0" layoutY="83.0" onAction="#openVendorPayments" text="Vendor Payments" />
+
+     <Button fx:id="btnMonthlyReport" layoutX="189.0" layoutY="83.0" onAction="#openMonthlyReport" text="Monthly Reports" />
+
+     <Button fx:id="btnPayrollProcessing" layoutX="308.0" layoutY="83.0" onAction="#openPayroll" text="Payroll Processing" />
+   <Button fx:id="btntaxreport" layoutX="381.0" layoutY="123.0" onAction="#openTexReport" text="Tax Report" />
+   <Button fx:id="btnbudgetforecast" layoutX="134.0" layoutY="123.0" onAction="#openBudgetForecast" text="Budget Forecast" />
+   <Button fx:id="btnbankreconciliation" layoutX="253.0" layoutY="123.0" onAction="#openBankReconciliation" text="Bank Reconciliation" />
+   <Label layoutX="44.0" layoutY="178.0" text="Daily Financial Dashboard">
+      <font>
+         <Font name="System Bold Italic" size="20.0" />
+      </font>
+   </Label>
+   <Text layoutX="44.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filter by Date" />
+   <DatePicker fx:id="financedatepickerCB" layoutX="139.0" layoutY="221.0" />
+   <Text layoutX="44.0" layoutY="271.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filter by Branch" />
+   <ComboBox fx:id="financebranchCB" layoutX="139.0" layoutY="254.0" prefHeight="26.0" prefWidth="175.0" />
+   <Button fx:id="ApplyFilterbtn" layoutX="346.0" layoutY="255.0" mnemonicParsing="false" onAction="#filterTable" text="Apply Filter" />
+   <TableView fx:id="financedashboardTableVIew" layoutX="42.0" layoutY="338.0" prefHeight="221.0" prefWidth="516.0">
+     <columns>
+       <TableColumn fx:id="dateTableColumn" prefWidth="140.0" text="Date" />
+       <TableColumn fx:id="BranchTableColumn" prefWidth="128.79998779296875" text="Branch" />
+         <TableColumn fx:id="incomeTableColumn" prefWidth="124.800048828125" text="Income" />
+         <TableColumn fx:id="expenseTableColumn" prefWidth="122.4000244140625" text="Expense" />
+     </columns>
+   </TableView>
+   <Label fx:id="StatusoffilterLabel" layoutX="280.0" layoutY="308.0" text="Status" />
+
+</AnchorPane>
