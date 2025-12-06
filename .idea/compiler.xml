@@ -6,8 +6,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+<<<<<<< HEAD
         <module name="OOP_project_group02_Bata_shoe_company (2)" />
         <module name="OOP_project_group02_Bata_shoe_company (1)" />
+=======
+        <module name="OOP_project_group02_Bata_shoe_company (1)" />
+        <module name="OOP_project_group02_Bata_shoe_company" />
+>>>>>>> 52ae2c2349c8a370b9f1325bdaea58fe69079be6
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
