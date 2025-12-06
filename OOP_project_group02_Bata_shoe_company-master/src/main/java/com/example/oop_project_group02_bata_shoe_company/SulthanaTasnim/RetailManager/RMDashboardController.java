@@ -51,7 +51,24 @@ public class RMDashboardController
     }
 
     @javafx.fxml.FXML
-    public void viewGeneratePerformanceReports(ActionEvent actionEvent) {
+    public void viewGeneratePerformanceReports(ActionEvent actionEvent) throws IOException {
+        // Load FXML
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("RM_G8_Reports.fxml"));
+
+        // Create Scene from FXML
+        Scene scene = new Scene(fxmlLoader.load());
+
+        // Create Stage
+        Stage stage = new Stage();
+
+        stage.setTitle("RM_G8_Reports");
+
+        // Set scene to stage
+        stage.setScene(scene);
+
+        // Show the Stage
+        stage.show();
+
     }
 
     @javafx.fxml.FXML
