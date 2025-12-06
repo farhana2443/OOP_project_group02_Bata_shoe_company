@@ -1,9 +1,12 @@
 package com.example.oop_project_group02_bata_shoe_company;
 
-import javafx.event.*;
-import javafx.scene.control.*;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 
-public class Login
+public class LoginController
 {
     @javafx.fxml.FXML
     private ComboBox employeetypecombobox;

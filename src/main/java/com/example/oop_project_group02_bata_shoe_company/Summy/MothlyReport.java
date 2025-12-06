@@ -37,7 +37,7 @@ public class MothlyReport
         int selectedMonth = selectedDate.getMonthValue();
         int selectedYear = selectedDate.getYear();
 
-        // Filter records by month and year
+
         List<FinanceRecordModelClass> filteredRecords = FinanceRecordModelClass
                 .getObservableRecords()
                 .stream()
@@ -50,19 +50,19 @@ public class MothlyReport
         }
 
         try {
-            // Ensure reports folder exists
+
             File reportsDir = new File("reports");
             if (!reportsDir.exists()) {
                 reportsDir.mkdirs();
             }
 
-            // Generate PDF file path with month-year in filename
+
             String filePath = String.format("reports/MonthlyReport_%d-%02d.pdf", selectedYear, selectedMonth);
 
-            // Column headers
+
             String[] columns = {"Date", "Branch", "Income", "Expense"};
 
-            // Extractor functions
+
             List<Function<FinanceRecordModelClass, String>> extractors = Arrays.asList(
                     r -> r.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),
                     FinanceRecordModelClass::getBranch,
@@ -70,7 +70,7 @@ public class MothlyReport
                     r -> String.valueOf(r.getExpense())
             );
 
-            // Generate PDF
+
             PDFHelperModelClass.generatePDF(filePath,
                     "Monthly Finance Report - " + selectedDate.getMonth() + " " + selectedYear,
                     columns, filteredRecords, extractors);
