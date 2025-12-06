@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oop_project_group02_bata_shoe_company.SulthanaTasnim.Customer.CUG2SearchModel">
+   <children>
+      <Label layoutX="21.0" layoutY="14.0" text="Search Specific Shoe Model">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="21.0" layoutY="47.0" text="Search by name" />
+      <TextField fx:id="productNameTF" layoutX="138.0" layoutY="43.0" />
+      <Button layoutX="316.0" layoutY="43.0" mnemonicParsing="false" onAction="#searchandFiltertheItemontheTable" text="Search" />
+      <TableView fx:id="productTV" layoutX="65.0" layoutY="90.0" prefHeight="121.0" prefWidth="445.0">
+        <columns>
+          <TableColumn fx:id="productCodeTC" prefWidth="75.0" text="Code" />
+          <TableColumn fx:id="productNameTC" prefWidth="75.0" text="Name" />
+            <TableColumn fx:id="categoryTC" prefWidth="75.0" text="Category" />
+            <TableColumn fx:id="priceTC" prefWidth="75.0" text="Price" />
+            <TableColumn fx:id="availabilityTC" prefWidth="75.0" text="Availability" />
+        </columns>
+      </TableView>
+      <Button layoutX="236.0" layoutY="254.0" mnemonicParsing="false" onAction="#openProductDetailsPanel" text="View Details" />
+      <Label fx:id="messageLab" layoutX="249.0" layoutY="313.0" text="Message" />
+   </children>
+</AnchorPane>

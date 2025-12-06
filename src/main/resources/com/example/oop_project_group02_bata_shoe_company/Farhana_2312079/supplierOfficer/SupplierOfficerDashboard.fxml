@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Polygon?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="682.0" prefWidth="905.0" style="-fx-background-color: #dc2b0b;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oop_project_group02_bata_shoe_company.Farhana_2312079.supplierOfficer.SupplierOfficerDashboardController">
+    <children>
+        <AnchorPane layoutX="41.0" layoutY="174.0" prefHeight="426.0" prefWidth="750.0" style="-fx-background-color: #FDF6F0;">
+            <children>
+                <Button layoutX="61.0" layoutY="105.0" mnemonicParsing="false" onAction="#managePurchaseOrdersButton" prefHeight="102.0" prefWidth="111.0" style="-fx-background-color: #dc2b0b; -fx-text-fill: white;" text="   📦&#10; Manage &#10;Purchase &#10;  Orders">
+                    <font>
+                        <Font name="Segoe UI Emoji" size="14.0" />
+                    </font>
+                </Button>
+                <Button layoutX="211.0" layoutY="105.0" mnemonicParsing="false" onAction="#trackDeliveriesButton" prefHeight="102.0" prefWidth="111.0" style="-fx-background-color: #dc2b0b; -fx-text-fill: white;" text="      🚛&#10;    Track &#10;Deliveries">
+                    <font>
+                        <Font name="Segoe UI Emoji" size="14.0" />
+                    </font>
+                </Button>
+                <Button layoutX="61.0" layoutY="257.0" mnemonicParsing="false" onAction="#materialRestockButton" prefHeight="102.0" prefWidth="111.0" style="-fx-background-color: #dc2b0b; -fx-text-fill: white;" text="     🔐&#10;  Material &#10;  Restock">
+                    <font>
+                        <Font name="Segoe UI Emoji" size="14.0" />
+                    </font>
+                </Button>
+                <Button layoutX="515.0" layoutY="105.0" mnemonicParsing="false" onAction="#processInvoicesButton" prefHeight="102.0" prefWidth="111.0" style="-fx-background-color: #dc2b0b; -fx-text-fill: white;" text="   📃&#10;Process &#10;Invoices">
+                    <font>
+                        <Font name="Segoe UI Emoji" size="14.0" />
+                    </font>
+                </Button>
+                <Button layoutX="360.0" layoutY="105.0" mnemonicParsing="false" onAction="#supplierPerformanceButton" prefHeight="102.0" prefWidth="111.0" style="-fx-background-color: #dc2b0b; -fx-text-fill: white;" text="        📊&#10;   Supplier &#10;Performance">
+                    <font>
+                        <Font name="Segoe UI Emoji" size="14.0" />
+                    </font>
+                </Button>
+                <Button layoutX="515.0" layoutY="257.0" mnemonicParsing="false" onAction="#generateReportsButton" prefHeight="102.0" prefWidth="111.0" style="-fx-background-color: #dc2b0b; -fx-text-fill: white;" text="     📑&#10;Generate&#10; Reports">
+                    <font>
+                        <Font name="Segoe UI Emoji" size="14.0" />
+                    </font>
+                </Button>
+                <Button layoutX="360.0" layoutY="257.0" mnemonicParsing="false" onAction="#sendUpdatesButton" prefHeight="102.0" prefWidth="111.0" style="-fx-background-color: #dc2b0b; -fx-text-fill: white;" text="   📩&#10;  Send &#10;Updates">
+                    <font>
+                        <Font name="Segoe UI Emoji" size="14.0" />
+                    </font>
+                </Button>
+                <Button layoutX="211.0" layoutY="257.0" mnemonicParsing="false" onAction="#manageSuppliersButton" prefHeight="102.0" prefWidth="111.0" style="-fx-background-color: #dc2b0b; -fx-text-fill: white;" text="     👥&#10; Manage &#10;Suppliers">
+                    <font>
+                        <Font name="Segoe UI Emoji" size="14.0" />
+                    </font>
+                </Button>
+            </children>
+        </AnchorPane>
+        <Polygon fill="#fdf6f0" layoutX="33.0" layoutY="641.0" points="-54.0000114440918, -121.0, 50.0, 40.0, 126.80000305175781, -24.199951171875" stroke="#fdf6f0" strokeType="INSIDE" />
+        <Polygon fill="#fdf6f0" layoutX="856.0" layoutY="31.0" points="-136.99993896484375, -13.600000381469727, 79.79998779296875, 99.19999694824219, 0.0, -60.0" stroke="#fdf6f0" strokeType="INSIDE" />
+        <Pane layoutX="-143.0" layoutY="-94.0" prefHeight="188.0" prefWidth="244.0" style="-fx-background-color: #FDF6F0; -fx-background-radius: 10;" />
+        <Pane layoutX="153.0" layoutY="94.0" prefHeight="82.0" prefWidth="150.0" style="-fx-background-color: #FDF6F0; -fx-background-radius: 10;" />
+        <Text fill="#fdf6f0" layoutX="347.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Supplier Officer Dashboard" wrappingWidth="371.99995117187495">
+            <font>
+                <Font name="System Bold Italic" size="24.0" />
+            </font>
+        </Text>
+      <Button layoutX="719.0" layoutY="623.0" mnemonicParsing="false" onAction="#signOutToLoginPageB2" prefHeight="26.0" prefWidth="162.0" style="-fx-background-color: #FDF6F0;" text="Sign Out 👋">
+         <font>
+            <Font name="Segoe UI Emoji" size="15.0" />
+         </font>
+      </Button>
+      <Label layoutX="66.0" layoutY="57.0" prefHeight="94.0" prefWidth="135.0" style="-fx-text-fill: #dc2b0b; -fx-background-color: #FDF6F0;" text=" Bata">
+         <font>
+            <Font name="STXingkai" size="67.0" />
+         </font>
+      </Label>
+    </children>
+</AnchorPane>
