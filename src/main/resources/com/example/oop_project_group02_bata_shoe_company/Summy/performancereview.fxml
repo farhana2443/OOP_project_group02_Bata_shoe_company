@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="500.0" prefWidth="600.0"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.oop_project_group02_bata_shoe_company.Summy.Performancereview">
+
+    <children>
+
+        <Label layoutX="204.0" layoutY="37.0" text="Performance Review">
+            <font>
+                <Font name="System Bold Italic" size="20.0"/>
+            </font>
+        </Label>
+
+        <ComboBox fx:id="employeeCB"
+                  layoutX="60.0" layoutY="99.0"
+                  prefHeight="26.0" prefWidth="287.0"
+                  promptText="Employee Name"/>
+
+        <ComboBox fx:id="ratingCB"
+                  layoutX="375.0" layoutY="99.0"
+                  prefHeight="26.0" prefWidth="167.0"
+                  promptText="Rating"/>
+
+        <Text layoutX="257.0" layoutY="213.0" text="Review Summary"/>
+
+        <Button layoutX="60.0" layoutY="149.0"
+                mnemonicParsing="false"
+                onAction="#saveandaddrating"
+                prefHeight="26.0" prefWidth="124.0"
+                text="Save Rating"/>
+
+        <TableView fx:id="ReviewTV"
+                   layoutX="74.0" layoutY="250.0"
+                   prefHeight="200.0" prefWidth="452.0">
+
+            <columns>
+                <TableColumn fx:id="colName"
+                             prefWidth="320"
+                             text="Name"/>
+                <TableColumn fx:id="colRating"
+                             prefWidth="130"
+                             text="Rating"/>
+            </columns>
+
+        </TableView>
+
+    </children>
+
+</AnchorPane>

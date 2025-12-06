@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oop_project_group02_bata_shoe_company.Summy.PayrollInput">
+   <children>
+      <Label layoutX="238.0" layoutY="55.0" text="Payroll Input">
+         <font>
+            <Font name="System Bold Italic" size="20.0" />
+         </font>
+      </Label>
+      <Text layoutX="98.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" />
+      <TextField fx:id="nameTF" layoutX="183.0" layoutY="115.0" prefHeight="26.0" prefWidth="213.0" />
+      <Text layoutX="98.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee ID" />
+      <TextField fx:id="employeeIDTF" layoutX="183.0" layoutY="156.0" prefHeight="26.0" prefWidth="214.0" />
+      <Text layoutX="98.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Salary" />
+      <TextField fx:id="SalaryTF" layoutX="183.0" layoutY="200.0" prefHeight="26.0" prefWidth="214.0" />
+      <Text layoutX="98.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Deduction" />
+      <TextField fx:id="DeductionTF" layoutX="183.0" layoutY="240.0" prefHeight="26.0" prefWidth="214.0" />
+      <Text layoutX="98.0" layoutY="294.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bonus" />
+      <TextField fx:id="bonusTF" layoutX="183.0" layoutY="277.0" prefHeight="26.0" prefWidth="214.0" />
+      <Button layoutX="183.0" layoutY="323.0" mnemonicParsing="false" onAction="#ValidateandSendforFinanceReport" text="Validate and Send for Finance Report" />
+   </children>
+</AnchorPane>
