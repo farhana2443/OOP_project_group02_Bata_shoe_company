@@ -24,7 +24,7 @@ public class Login
 
     @javafx.fxml.FXML
     public void initialize() {
-        employeetypecombobox.getItems().addAll("Finance Officer", "HR Manager");
+        employeetypecombobox.getItems().addAll("Finance Officer", "HR Manager","Production Supervisor","Supplier Officer");
     }
 
     @javafx.fxml.FXML
@@ -45,15 +45,23 @@ public class Login
 
         try {
             FXMLLoader loader;
+
             if (selectedType.equals("Finance Officer") && password.equals("1234")) {
                 loader = new FXMLLoader(getClass().getResource("Summy/finance_dashboard.fxml"));
-            } else if (selectedType.equals("HR Manager") && password.equals("12345")) {
+            }
+            else if (selectedType.equals("HR Manager") && password.equals("12345")) {
                 loader = new FXMLLoader(getClass().getResource("Summy/RecruitmentPortalDashboardHR.fxml"));
-            } else {
+            }
+            else if (selectedType.equals("Production Supervisor") && password.equals("22222")) {
+                loader = new FXMLLoader(getClass().getResource("Farhana_2312079/productionSupervisor/ProductionSupervisorDashboard.fxml"));
+            }
+            else if (selectedType.equals("Supplier Officer") && password.equals("33333")) {
+                loader = new FXMLLoader(getClass().getResource("Farhana_2312079/supplierOfficer/SupplierOfficerDashboard.fxml"));
+            }
+            else {
                 showAlert("Incorrect password for selected employee type!");
                 return;
             }
-
 
             Scene newScene = new Scene(loader.load());
             Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
